@@ -7,6 +7,8 @@ import top.xiaorang.spring.basic.Customer;
 import top.xiaorang.spring.basic.Person;
 import top.xiaorang.spring.basic.UserService;
 
+import java.sql.Connection;
+
 public class SpringTest {
 
   @Test
@@ -46,5 +48,14 @@ public class SpringTest {
     ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
     UserService userService = ctx.getBean("userService", UserService.class);
     userService.saveAllUsers();
+  }
+
+  @Test
+  public void test5() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    Connection connection = ctx.getBean("connection", Connection.class);
+    System.out.println(connection);
+    Connection connection1 = ctx.getBean("connection", Connection.class);
+    System.out.println(connection1);
   }
 }
