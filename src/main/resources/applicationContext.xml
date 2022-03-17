@@ -48,4 +48,12 @@
             </props>
         </property>
     </bean>
+
+    <bean id="userDao" class="top.xiaorang.spring.basic.UserDaoImpl"/>
+
+    <bean id="userService" class="top.xiaorang.spring.basic.UserServiceImpl">
+        <property name="userDao">
+            <ref bean="userDao"/>
+        </property>
+    </bean>
 </beans>

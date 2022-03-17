@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import top.xiaorang.spring.basic.Customer;
 import top.xiaorang.spring.basic.Person;
+import top.xiaorang.spring.basic.UserService;
 
 public class SpringTest {
 
@@ -38,5 +39,12 @@ public class SpringTest {
     ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
     Customer customer = ctx.getBean("customer", Customer.class);
     System.out.println(customer);
+  }
+
+  @Test
+  public void test4() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    UserService userService = ctx.getBean("userService", UserService.class);
+    userService.saveAllUsers();
   }
 }
