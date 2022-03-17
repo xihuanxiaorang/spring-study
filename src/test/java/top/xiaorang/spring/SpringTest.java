@@ -14,4 +14,21 @@ public class SpringTest {
     Person person = applicationContext.getBean("person", Person.class);
     System.out.println(person);
   }
+
+  @Test
+  public void test2() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    Person person = ctx.getBean("person", Person.class);
+    System.out.println(person);
+    Person person1 = (Person) ctx.getBean("person");
+    System.out.println(person1);
+    Person person2 = ctx.getBean(Person.class);
+    System.out.println(person2);
+    String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+    for (String beanDefinitionName : beanDefinitionNames) {
+      System.out.println(beanDefinitionName);
+    }
+    System.out.println(ctx.containsBean("person"));
+    System.out.println(ctx.containsBeanDefinition("person"));
+  }
 }
