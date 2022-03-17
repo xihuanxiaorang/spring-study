@@ -5,7 +5,13 @@ public class Person {
   private Integer age;
 
   private Person() {
-    System.out.println("Person类构造方法");
+    System.out.println("Person类私有构造方法");
+  }
+
+  public Person(String name, Integer age) {
+    System.out.println("Person类全参构造方法");
+    this.name = name;
+    this.age = age;
   }
 
   public String getName() {

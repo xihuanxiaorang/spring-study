@@ -2,7 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="person" class="top.xiaorang.spring.basic.Person" p:name="小让" p:age="10"/>
+    <!--    <bean id="person" class="top.xiaorang.spring.basic.Person" p:name="小让" p:age="10"/>-->
+    <bean id="person" class="top.xiaorang.spring.basic.Person">
+        <constructor-arg name="name" value="小让"/>
+        <constructor-arg name="age" value="10"/>
+    </bean>
 
     <bean id="customer" class="top.xiaorang.spring.basic.Customer" p:name="小明" p:age="18">
         <property name="emails">
