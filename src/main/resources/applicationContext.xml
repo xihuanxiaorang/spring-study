@@ -6,4 +6,46 @@
         <property name="name" value="小让"/>
         <property name="age" value="10"/>
     </bean>
+
+    <bean id="customer" class="top.xiaorang.spring.basic.Customer">
+        <property name="name" value="小明"/>
+        <property name="age" value="18"/>
+        <property name="emails">
+            <array>
+                <value>15019474951@163.com</value>
+                <value>623052545@qq.com</value>
+                <value>2329862718@qq.com</value>
+            </array>
+        </property>
+        <property name="tels">
+            <set>
+                <value>15019474951</value>
+                <value>13838384388</value>
+                <value>18274831189</value>
+            </set>
+        </property>
+        <property name="addresses">
+            <list>
+                <value>珠光村东区91栋413</value>
+                <value>龙胜一小队xxx栋605</value>
+            </list>
+        </property>
+        <property name="qqs">
+            <map>
+                <entry>
+                    <key>
+                        <value>xiaorang</value>
+                    </key>
+                    <value>2329862718</value>
+                </entry>
+                <entry key="sanshi" value="623052545"/>
+            </map>
+        </property>
+        <property name="p">
+            <props>
+                <prop key="birthday">1995-07-13</prop>
+                <prop key="high">168</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

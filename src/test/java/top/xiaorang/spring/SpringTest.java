@@ -3,6 +3,7 @@ package top.xiaorang.spring;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import top.xiaorang.spring.basic.Customer;
 import top.xiaorang.spring.basic.Person;
 
 public class SpringTest {
@@ -30,5 +31,12 @@ public class SpringTest {
     }
     System.out.println(ctx.containsBean("person"));
     System.out.println(ctx.containsBeanDefinition("person"));
+  }
+
+  @Test
+  public void test3() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    Customer customer = ctx.getBean("customer", Customer.class);
+    System.out.println(customer);
   }
 }
