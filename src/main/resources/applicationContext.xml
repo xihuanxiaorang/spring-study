@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <context:property-placeholder location="classpath:/db.properties"/>
+
     <!--    <bean id="person" class="top.xiaorang.spring.basic.Person" p:name="小让" p:age="10"/>-->
     <bean id="person" class="top.xiaorang.spring.basic.Person" init-method="myInit" destroy-method="myDestroy">
         <!--        <constructor-arg name="name" value="小让"/>-->
@@ -54,13 +61,12 @@
 
     <bean id="userService" class="top.xiaorang.spring.basic.UserServiceImpl" p:userDao-ref="userDao"/>
 
-    <!--    <bean id="connection" class="top.xiaorang.spring.factorybean.ConnectionFactoryBean">-->
-    <!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
-    <!--        <property name="url"-->
-    <!--                  value="jdbc:mysql://localhost:3306/atguigudb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>-->
-    <!--        <property name="username" value="root"/>-->
-    <!--        <property name="password" value=""/>-->
-    <!--    </bean>-->
+    <bean id="connection" class="top.xiaorang.spring.factorybean.ConnectionFactoryBean">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
     <!--    <bean id="connectionFactory" class="top.xiaorang.spring.factory.ConnectionFactory">-->
     <!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
     <!--        <property name="url"-->
@@ -69,6 +75,6 @@
     <!--        <property name="password" value=""/>-->
     <!--    </bean>-->
     <!--    <bean id="connection" factory-bean="connectionFactory" factory-method="getConnection"/>-->
-    <bean id="connection" class="top.xiaorang.spring.staticfactory.StaticConnectionFactory"
-          factory-method="getConnection"/>
+    <!--    <bean id="connection" class="top.xiaorang.spring.staticfactory.StaticConnectionFactory"-->
+    <!--          factory-method="getConnection"/>-->
 </beans>
