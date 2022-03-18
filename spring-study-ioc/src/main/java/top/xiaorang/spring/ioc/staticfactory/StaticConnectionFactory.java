@@ -1,4 +1,4 @@
-package top.xiaorang.spring.staticfactory;
+package top.xiaorang.spring.ioc.staticfactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

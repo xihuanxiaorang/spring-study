@@ -1,4 +1,4 @@
-package top.xiaorang.spring.basic;
+package top.xiaorang.spring.ioc.basic;
 
 import java.io.Serializable;
 import java.util.*;

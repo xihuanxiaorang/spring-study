@@ -1,4 +1,4 @@
-package top.xiaorang.spring.basic;
+package top.xiaorang.spring.ioc.basic;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

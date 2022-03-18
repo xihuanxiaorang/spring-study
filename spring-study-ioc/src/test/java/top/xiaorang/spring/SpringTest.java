@@ -3,9 +3,9 @@ package top.xiaorang.spring;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import top.xiaorang.spring.basic.Customer;
-import top.xiaorang.spring.basic.Person;
-import top.xiaorang.spring.basic.UserService;
+import top.xiaorang.spring.ioc.basic.Customer;
+import top.xiaorang.spring.ioc.basic.Person;
+import top.xiaorang.spring.ioc.basic.UserService;
 
 import java.sql.Connection;
 

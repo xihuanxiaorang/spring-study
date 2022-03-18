@@ -1,4 +1,4 @@
-package top.xiaorang.spring.basic;
+package top.xiaorang.spring.ioc.basic;
 
 public class UserServiceImpl implements UserService {
   private UserDao userDao;

@@ -1,4 +1,4 @@
-package top.xiaorang.spring.factorybean;
+package top.xiaorang.spring.ioc.factorybean;
 
 import org.springframework.beans.factory.FactoryBean;
 

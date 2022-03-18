@@ -10,7 +10,7 @@
     <context:property-placeholder location="classpath:/db.properties"/>
 
     <!--    <bean id="person" class="top.xiaorang.spring.basic.Person" p:name="小让" p:age="10"/>-->
-    <bean id="person" class="top.xiaorang.spring.basic.Person" init-method="myInit" destroy-method="myDestroy">
+    <bean id="person" class="top.xiaorang.spring.ioc.basic.Person" init-method="myInit" destroy-method="myDestroy">
         <!--        <constructor-arg name="name" value="小让"/>-->
         <!--        <constructor-arg name="age" value="10"/>-->
         <property name="name" value="小让"/>
@@ -18,7 +18,7 @@
         <property name="birthday" value="2022-03-18"/>
     </bean>
 
-    <bean id="customer" class="top.xiaorang.spring.basic.Customer" p:name="小明" p:age="18">
+    <bean id="customer" class="top.xiaorang.spring.ioc.basic.Customer" p:name="小明" p:age="18">
         <property name="emails">
             <array>
                 <value>15019474951@163.com</value>
@@ -58,11 +58,11 @@
         </property>
     </bean>
 
-    <bean id="userDao" class="top.xiaorang.spring.basic.UserDaoImpl"/>
+    <bean id="userDao" class="top.xiaorang.spring.ioc.basic.UserDaoImpl"/>
 
-    <bean id="userService" class="top.xiaorang.spring.basic.UserServiceImpl" p:userDao-ref="userDao"/>
+    <bean id="userService" class="top.xiaorang.spring.ioc.basic.UserServiceImpl" p:userDao-ref="userDao"/>
 
-    <bean id="connection" class="top.xiaorang.spring.factorybean.ConnectionFactoryBean">
+    <bean id="connection" class="top.xiaorang.spring.ioc.factorybean.ConnectionFactoryBean">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -79,7 +79,7 @@
     <!--    <bean id="connection" class="top.xiaorang.spring.staticfactory.StaticConnectionFactory"-->
     <!--          factory-method="getConnection"/>-->
 
-    <bean id="myDateConverter" class="top.xiaorang.spring.converter.MyDateConverter">
+    <bean id="myDateConverter" class="top.xiaorang.spring.ioc.converter.MyDateConverter">
         <property name="pattern" value="yyyy-MM-dd"/>
     </bean>
 
