@@ -1,6 +1,8 @@
 package top.xiaorang.spring.basic;
 
-public class Person {
+import org.springframework.beans.factory.InitializingBean;
+
+public class Person implements InitializingBean {
   private String name;
   private Integer age;
 
@@ -35,5 +37,14 @@ public class Person {
   @Override
   public String toString() {
     return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    System.out.println("Person类的afterPropertiesSet初始化方法");
+  }
+
+  public void myInit() {
+    System.out.println("自定义的普通方法作为初始化方法");
   }
 }
