@@ -3,9 +3,12 @@ package top.xiaorang.spring.basic;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.util.Date;
+
 public class Person implements InitializingBean, DisposableBean {
   private String name;
   private Integer age;
+  private Date birthday;
 
   private Person() {
     System.out.println("Person类私有构造方法");
@@ -35,9 +38,18 @@ public class Person implements InitializingBean, DisposableBean {
     this.age = age;
   }
 
+  public Date getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(Date birthday) {
+    System.out.println("birthday=" + birthday);
+    this.birthday = birthday;
+  }
+
   @Override
   public String toString() {
-    return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
+    return "Person{" + "name='" + name + '\'' + ", age=" + age + ", birthday=" + birthday + '}';
   }
 
   @Override

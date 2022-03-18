@@ -15,6 +15,7 @@
         <!--        <constructor-arg name="age" value="10"/>-->
         <property name="name" value="小让"/>
         <property name="age" value="10"/>
+        <property name="birthday" value="2022-03-18"/>
     </bean>
 
     <bean id="customer" class="top.xiaorang.spring.basic.Customer" p:name="小明" p:age="18">
@@ -77,4 +78,16 @@
     <!--    <bean id="connection" factory-bean="connectionFactory" factory-method="getConnection"/>-->
     <!--    <bean id="connection" class="top.xiaorang.spring.staticfactory.StaticConnectionFactory"-->
     <!--          factory-method="getConnection"/>-->
+
+    <bean id="myDateConverter" class="top.xiaorang.spring.converter.MyDateConverter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myDateConverter"/>
+            </set>
+        </property>
+    </bean>
 </beans>
