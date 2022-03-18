@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--    <bean id="person" class="top.xiaorang.spring.basic.Person" p:name="小让" p:age="10"/>-->
-    <bean id="person" class="top.xiaorang.spring.basic.Person" lazy-init="true">
+    <bean id="person" class="top.xiaorang.spring.basic.Person" scope="prototype">
         <constructor-arg name="name" value="小让"/>
         <constructor-arg name="age" value="10"/>
     </bean>
