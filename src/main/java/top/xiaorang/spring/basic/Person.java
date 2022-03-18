@@ -1,8 +1,9 @@
 package top.xiaorang.spring.basic;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class Person implements InitializingBean {
+public class Person implements InitializingBean, DisposableBean {
   private String name;
   private Integer age;
 
@@ -46,5 +47,14 @@ public class Person implements InitializingBean {
 
   public void myInit() {
     System.out.println("自定义的普通方法作为初始化方法");
+  }
+
+  @Override
+  public void destroy() throws Exception {
+    System.out.println("Person类的destroy销毁方法");
+  }
+
+  public void myDestroy() {
+    System.out.println("自定义的普通方法作为销毁方法");
   }
 }

@@ -61,8 +61,10 @@ public class SpringTest {
 
   @Test
   public void test6() {
-    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    ClassPathXmlApplicationContext ctx =
+        new ClassPathXmlApplicationContext("/applicationContext.xml");
     Person person = ctx.getBean("person", Person.class);
     System.out.println(person);
+    ctx.close();
   }
 }
