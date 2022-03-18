@@ -52,11 +52,19 @@
 
     <bean id="userService" class="top.xiaorang.spring.basic.UserServiceImpl" p:userDao-ref="userDao"/>
 
-    <bean id="connection" class="top.xiaorang.spring.factorybean.ConnectionFactoryBean">
+    <!--    <bean id="connection" class="top.xiaorang.spring.factorybean.ConnectionFactoryBean">-->
+    <!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+    <!--        <property name="url"-->
+    <!--                  value="jdbc:mysql://localhost:3306/atguigudb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>-->
+    <!--        <property name="username" value="root"/>-->
+    <!--        <property name="password" value=""/>-->
+    <!--    </bean>-->
+    <bean id="connectionFactory" class="top.xiaorang.spring.factory.ConnectionFactory">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url"
                   value="jdbc:mysql://localhost:3306/atguigudb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>
         <property name="username" value="root"/>
         <property name="password" value=""/>
     </bean>
+    <bean id="connection" factory-bean="connectionFactory" factory-method="getConnection"/>
 </beans>
