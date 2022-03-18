@@ -58,4 +58,11 @@ public class SpringTest {
     Connection connection1 = ctx.getBean("connection", Connection.class);
     System.out.println(connection1);
   }
+
+  @Test
+  public void test6() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    Person person = ctx.getBean("person", Person.class);
+    System.out.println(person);
+  }
 }
