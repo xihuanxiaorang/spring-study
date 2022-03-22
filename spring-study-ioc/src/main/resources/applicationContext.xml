@@ -90,4 +90,6 @@
             </set>
         </property>
     </bean>
+
+    <bean class="top.xiaorang.spring.ioc.beanpostprocessor.MyBeanPostProcessor" />
 </beans>
