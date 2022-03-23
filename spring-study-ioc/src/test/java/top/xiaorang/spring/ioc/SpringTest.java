@@ -1,4 +1,4 @@
-package top.xiaorang.spring;
+package top.xiaorang.spring.ioc;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
