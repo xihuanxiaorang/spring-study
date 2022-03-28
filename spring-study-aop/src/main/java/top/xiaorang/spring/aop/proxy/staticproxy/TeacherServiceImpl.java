@@ -5,4 +5,8 @@ public class TeacherServiceImpl implements TeacherService {
   public void teach() {
     System.out.println("教课");
   }
+
+  public static void say() {
+    System.out.println("说话");
+  }
 }
