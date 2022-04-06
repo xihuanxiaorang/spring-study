@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean id="teacherService" class="top.xiaorang.spring.aop.proxy.staticproxy.TeacherServiceImpl"/>
 
     <bean id="teacherServiceProxy" class="top.xiaorang.spring.aop.proxy.staticproxy.TeacherServiceProxy">
         <property name="teacherService" ref="teacherService"/>
     </bean>
+
+    <bean id="userService" class="top.xiaorang.spring.aop.proxy.springproxy.UserServiceImpl"/>
+
+    <bean id="logInterceptor" class="top.xiaorang.spring.aop.proxy.springproxy.LogInterceptor"/>
+
+    <aop:config>
+        <aop:aspect id="logAspect" ref="logInterceptor">
+            <aop:pointcut id="pc" expression="execution(* *(..))"/>
+            <aop:before method="beforeMethod" pointcut-ref="pc"/>
+            <aop:after method="afterMethod" pointcut-ref="pc"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pc" returning="result"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="e"/>
+        </aop:aspect>
+    </aop:config>
 </beans>

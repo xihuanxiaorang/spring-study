@@ -5,6 +5,7 @@ import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import top.xiaorang.spring.aop.proxy.springproxy.UserService;
 import top.xiaorang.spring.aop.proxy.staticproxy.TeacherService;
 
 import java.lang.reflect.Proxy;
@@ -61,5 +62,12 @@ public class SpringTest {
             });
     TeacherService teacherServiceProxy = (TeacherService) enhancer.create();
     teacherServiceProxy.teach();
+  }
+
+  @Test
+  public void test4() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+    UserService userService = ctx.getBean("userService", UserService.class);
+    userService.login("小让", "123456");
   }
 }
