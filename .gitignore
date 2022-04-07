@@ -34,3 +34,4 @@ build/
 
 /log/
 /com/sun/proxy/
+/cglib-debug-classes/

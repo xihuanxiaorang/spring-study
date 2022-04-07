@@ -2,6 +2,7 @@ package top.xiaorang.spring.aop;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.cglib.core.DebuggingClassWriter;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +15,7 @@ import java.lang.reflect.Proxy;
 
 public class SpringTest {
   public static void main(String[] args) {
-    System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+    /*System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
     System.out.println("-----------------开始测试--------------------");
     TeacherService teacherService = new TeacherServiceImpl();
     ClassLoader classLoader = teacherService.getClass().getClassLoader();
@@ -30,6 +31,26 @@ public class SpringTest {
                   System.out.println("---------log---------");
                   return res;
                 });
+    teacherServiceProxy.teach();*/
+
+    System.getProperties()
+        .put(
+            DebuggingClassWriter.DEBUG_LOCATION_PROPERTY,
+            System.getProperty("user.dir") + "/cglib-debug-classes/");
+    TeacherService teacherService = new TeacherServiceImpl();
+    Class<?>[] interfaces = teacherService.getClass().getInterfaces();
+    Enhancer enhancer = new Enhancer();
+    enhancer.setSuperclass(teacherService.getClass());
+    enhancer.setInterfaces(interfaces);
+    enhancer.setCallback(
+        (MethodInterceptor)
+            (object, method, arguments, methodProxy) -> {
+              System.out.println("---------Cglib log---------");
+              Object res = method.invoke(teacherService, arguments);
+              System.out.println("---------Cglib log---------");
+              return res;
+            });
+    TeacherService teacherServiceProxy = (TeacherService) enhancer.create();
     teacherServiceProxy.teach();
   }
 
