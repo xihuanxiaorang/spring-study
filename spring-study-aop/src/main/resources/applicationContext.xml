@@ -1,24 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
-    <bean id="teacherService" class="top.xiaorang.spring.aop.proxy.staticproxy.TeacherServiceImpl"/>
-
-    <bean id="teacherServiceProxy" class="top.xiaorang.spring.aop.proxy.staticproxy.TeacherServiceProxy">
-        <property name="teacherService" ref="teacherService"/>
-    </bean>
-
-    <bean id="userService" class="top.xiaorang.spring.aop.proxy.springproxy.UserServiceImpl"/>
-
-    <bean id="logInterceptor" class="top.xiaorang.spring.aop.proxy.springproxy.LogInterceptor"/>
-
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--    目标类-->
+    <bean id="memberService" class="top.xiaorang.spring.aop.service.MemberService"/>
+    <!--    切面-->
+    <bean id="xmlAspect" class="top.xiaorang.spring.aop.aspect.XmlAspect"/>
     <aop:config>
-        <aop:aspect id="logAspect" ref="logInterceptor">
-            <aop:pointcut id="pc" expression="execution(* *(..))"/>
-            <aop:before method="beforeMethod" pointcut-ref="pc"/>
-            <aop:after method="afterMethod" pointcut-ref="pc"/>
+        <!--        配置切面-->
+        <aop:aspect ref="xmlAspect">
+            <!--            配置切入点-->
+            <aop:pointcut id="pc" expression="execution(* top.xiaorang.spring.aop.service..*(..))"/>
+            <!--            环绕通知-->
+            <aop:around method="around" pointcut-ref="pc"/>
+            <!--            前置通知-->
+            <aop:before method="before" pointcut-ref="pc"/>
+            <!-- 后置返回通知；returning属性：用于设置后置通知的第二个参数的名称，类型是Object -->
             <aop:after-returning method="afterReturning" pointcut-ref="pc" returning="result"/>
+            <!-- 异常通知：如果没有异常，将不会执行增强；throwing属性：用于设置通知第二个参数的的名称、类型-->
             <aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="e"/>
+            <!--            后置通知-->
+            <aop:after method="after" pointcut-ref="pc"/>
         </aop:aspect>
     </aop:config>
 </beans>

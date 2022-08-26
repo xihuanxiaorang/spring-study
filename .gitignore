@@ -33,5 +33,5 @@ build/
 .vscode/
 
 /log/
-/com/sun/proxy/
+com
 /cglib-debug-classes/

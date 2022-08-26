@@ -1,122 +1,42 @@
 package top.xiaorang.spring.aop;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.cglib.core.DebuggingClassWriter;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import top.xiaorang.spring.aop.proxy.springproxy.UserService;
-import top.xiaorang.spring.aop.proxy.staticproxy.TeacherService;
-import top.xiaorang.spring.aop.proxy.staticproxy.TeacherServiceImpl;
-
-import java.lang.reflect.Proxy;
+import top.xiaorang.spring.aop.config.AopConfig;
+import top.xiaorang.spring.aop.service.MemberService;
 
 public class SpringTest {
-  public static void main(String[] args) {
-    /*System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
-    System.out.println("-----------------开始测试--------------------");
-    TeacherService teacherService = new TeacherServiceImpl();
-    ClassLoader classLoader = teacherService.getClass().getClassLoader();
-    Class<?>[] interfaces = teacherService.getClass().getInterfaces();
-    TeacherService teacherServiceProxy =
-        (TeacherService)
-            Proxy.newProxyInstance(
-                classLoader,
-                interfaces,
-                (proxy, method, arguments) -> {
-                  System.out.println("---------log---------");
-                  Object res = method.invoke(teacherService, arguments);
-                  System.out.println("---------log---------");
-                  return res;
-                });
-    teacherServiceProxy.teach();*/
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpringTest.class);
 
-    System.getProperties()
-        .put(
-            DebuggingClassWriter.DEBUG_LOCATION_PROPERTY,
-            System.getProperty("user.dir") + "/cglib-debug-classes/");
-    TeacherService teacherService = new TeacherServiceImpl();
-    Class<?>[] interfaces = teacherService.getClass().getInterfaces();
-    Enhancer enhancer = new Enhancer();
-    enhancer.setSuperclass(teacherService.getClass());
-    enhancer.setInterfaces(interfaces);
-    enhancer.setCallback(
-        (MethodInterceptor)
-            (object, method, arguments, methodProxy) -> {
-              System.out.println("---------Cglib log---------");
-              Object res = method.invoke(teacherService, arguments);
-              System.out.println("---------Cglib log---------");
-              return res;
-            });
-    TeacherService teacherServiceProxy = (TeacherService) enhancer.create();
-    teacherServiceProxy.teach();
-  }
+    @Test
+    public void test() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        MemberService memberService = ctx.getBean("memberService", MemberService.class);
+        LOGGER.info("========================这是一条华丽的分割线========================");
+        memberService.get();
+        LOGGER.info("========================这是一条华丽的分割线========================");
+        try {
+            memberService.delete(1L);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-  @Test
-  public void test1() {
-    ApplicationContext applicationContext =
-        new ClassPathXmlApplicationContext("/applicationContext.xml");
-    TeacherService teacherService =
-        applicationContext.getBean("teacherServiceProxy", TeacherService.class);
-    teacherService.teach();
-  }
-
-  @Test
-  public void test2() {
-    ApplicationContext applicationContext =
-        new ClassPathXmlApplicationContext("/applicationContext.xml");
-    TeacherService teacherService =
-        applicationContext.getBean("teacherService", TeacherService.class);
-    ClassLoader classLoader = teacherService.getClass().getClassLoader();
-    Class<?>[] interfaces = teacherService.getClass().getInterfaces();
-    TeacherService teacherServiceProxy =
-        (TeacherService)
-            Proxy.newProxyInstance(
-                classLoader,
-                interfaces,
-                (proxy, method, args) -> {
-                  System.out.println("---------log---------");
-                  Object res = method.invoke(teacherService, args);
-                  System.out.println("---------log---------");
-                  return res;
-                });
-    teacherServiceProxy.teach();
-  }
-
-  @Test
-  public void test3() {
-    ApplicationContext applicationContext =
-        new ClassPathXmlApplicationContext("/applicationContext.xml");
-    TeacherService teacherService =
-        applicationContext.getBean("teacherService", TeacherService.class);
-    Class<?>[] interfaces = teacherService.getClass().getInterfaces();
-    Enhancer enhancer = new Enhancer();
-    enhancer.setSuperclass(teacherService.getClass());
-    enhancer.setInterfaces(interfaces);
-    enhancer.setCallback(
-        (MethodInterceptor)
-            (object, method, args, methodProxy) -> {
-              System.out.println("---------Cglib log---------");
-              Object res = method.invoke(teacherService, args);
-              System.out.println("---------Cglib log---------");
-              return res;
-            });
-    TeacherService teacherServiceProxy = (TeacherService) enhancer.create();
-    teacherServiceProxy.teach();
-  }
-
-  @Test
-  public void test4() {
-    ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-    UserService userService = ctx.getBean("userService", UserService.class);
-    userService.login("小让", "123456");
-  }
-
-  @Before
-  public void before() {
-    System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
-    System.out.println("-----------------开始测试--------------------");
-  }
+    @Test
+    public void test1() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AopConfig.class);
+        MemberService memberService = ctx.getBean("memberService", MemberService.class);
+        LOGGER.info("========================这是一条华丽的分割线========================");
+        memberService.get();
+        LOGGER.info("========================这是一条华丽的分割线========================");
+        try {
+            memberService.delete(1L);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
