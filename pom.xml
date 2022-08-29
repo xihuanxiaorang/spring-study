@@ -11,6 +11,7 @@
     <modules>
         <module>spring-study-ioc</module>
         <module>spring-study-aop</module>
+        <module>spring-study-annotation</module>
     </modules>
 
     <properties>

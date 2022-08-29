@@ -1,0 +1,21 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--    <context:component-scan base-package="top.xiaorang.spring.annotation"/>-->
+
+    <bean id="person" class="top.xiaorang.spring.annotation.bean.Person" init-method="init" destroy-method="destroy">
+        <property name="name" value="xiaorang"/>
+        <property name="age" value="12"/>
+    </bean>
+
+    <context:property-placeholder location="classpath:teacher.properties"/>
+
+    <bean id="bookRepository" class="top.xiaorang.spring.annotation.repository.BookRepository"/>
+    <bean id="bookService" class="top.xiaorang.spring.annotation.service.BookService">
+        <property name="bookRepository" ref="bookRepository"/>
+    </bean>
+    <bean id="bookController" class="top.xiaorang.spring.annotation.controller.BookController">
+        <property name="bookService" ref="bookService"/>
+    </bean>
+</beans>
